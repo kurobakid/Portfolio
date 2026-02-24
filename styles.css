@@ -157,6 +157,43 @@ body {
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero Animations */
+.hero-animate {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-image-animate {
+    animation: fadeInRight 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* ============================================
@@ -210,11 +247,51 @@ body {
     border-radius: 6px;
     font-size: 14px;
     font-weight: 500;
-    transition: transform var(--transition);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.skill-tag.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .skill-tag:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Stagger animation for skill tags */
+.skill-animate:nth-child(1) { animation: skillFadeIn 0.5s ease-out 0.1s forwards; }
+.skill-animate:nth-child(2) { animation: skillFadeIn 0.5s ease-out 0.15s forwards; }
+.skill-animate:nth-child(3) { animation: skillFadeIn 0.5s ease-out 0.2s forwards; }
+.skill-animate:nth-child(4) { animation: skillFadeIn 0.5s ease-out 0.25s forwards; }
+.skill-animate:nth-child(5) { animation: skillFadeIn 0.5s ease-out 0.3s forwards; }
+.skill-animate:nth-child(6) { animation: skillFadeIn 0.5s ease-out 0.35s forwards; }
+.skill-animate:nth-child(7) { animation: skillFadeIn 0.5s ease-out 0.4s forwards; }
+.skill-animate:nth-child(8) { animation: skillFadeIn 0.5s ease-out 0.45s forwards; }
+.skill-animate:nth-child(9) { animation: skillFadeIn 0.5s ease-out 0.5s forwards; }
+.skill-animate:nth-child(10) { animation: skillFadeIn 0.5s ease-out 0.55s forwards; }
+.skill-animate:nth-child(11) { animation: skillFadeIn 0.5s ease-out 0.6s forwards; }
+.skill-animate:nth-child(12) { animation: skillFadeIn 0.5s ease-out 0.65s forwards; }
+.skill-animate:nth-child(13) { animation: skillFadeIn 0.5s ease-out 0.7s forwards; }
+.skill-animate:nth-child(14) { animation: skillFadeIn 0.5s ease-out 0.75s forwards; }
+.skill-animate:nth-child(15) { animation: skillFadeIn 0.5s ease-out 0.8s forwards; }
+.skill-animate:nth-child(16) { animation: skillFadeIn 0.5s ease-out 0.85s forwards; }
+.skill-animate:nth-child(17) { animation: skillFadeIn 0.5s ease-out 0.9s forwards; }
+.skill-animate:nth-child(18) { animation: skillFadeIn 0.5s ease-out 0.95s forwards; }
+.skill-animate:nth-child(19) { animation: skillFadeIn 0.5s ease-out 1s forwards; }
+
+@keyframes skillFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ============================================
@@ -234,12 +311,16 @@ body {
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 24px;
-    transition: box-shadow var(--transition);
+    transition: all 0.3s ease;
+    background: var(--bg-primary);
 }
 
 .experience-item:hover,
-.project-item:hover {
-    box-shadow: var(--shadow-sm);
+.project-item:hover,
+.education-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+    border-color: var(--primary-color);
 }
 
 .experience-header,
@@ -266,16 +347,22 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
+    transition: color 0.3s ease;
+}
+
+.collapsible-header:hover h3 {
+    color: var(--accent-blue);
 }
 
 .company-arrow {
     color: var(--text-light);
     font-weight: 400;
-    transition: transform var(--transition);
+    transition: all 0.3s ease;
 }
 
 .collapsible-header:hover .company-arrow {
     transform: translateX(3px);
+    color: var(--accent-blue);
 }
 
 .experience-company {
@@ -297,18 +384,87 @@ body {
 .collapsible-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.4s ease, 
+                margin-top 0.4s ease;
     opacity: 0;
 }
 
 .collapsible-card.active .collapsible-content {
-    max-height: 500px;
+    max-height: 800px;
     opacity: 1;
-    margin-top: 15px;
+    margin-top: 20px;
+    animation: contentSlideIn 0.5s ease-out;
 }
 
 .collapsible-card.active .company-arrow {
     transform: rotate(90deg);
+    color: var(--accent-blue);
+}
+
+@keyframes contentSlideIn {
+    from {
+        transform: translateY(-10px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Tech Stack & Responsibilities Styling */
+.tech-stack {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.tech-stack strong,
+.responsibilities strong,
+.project-role strong,
+.project-description strong {
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.tech-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 13px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.tech-tag:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.responsibilities ul,
+.collapsible-content ul {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.responsibilities li,
+.collapsible-content li {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+.project-role,
+.project-description {
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
 }
 
 .experience-summary,
@@ -543,7 +699,7 @@ body {
 }
 
 /* ============================================
-   UTILITY CLASSES
+   UTILITY CLASSES & ANIMATIONS
    ============================================ */
 .fade-in {
     opacity: 0;
@@ -554,5 +710,38 @@ body {
 .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Scroll Fade-In Animation */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Smooth Scroll */
+html {
+    scroll-padding-top: 80px;
+}
+
+/* Loading State */
+body.loading * {
+    animation-play-state: paused !important;
+    transition: none !important;
+}
+
+/* Hover Glow Effect */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
 }
 

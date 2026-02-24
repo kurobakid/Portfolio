@@ -87,27 +87,26 @@ const observerOptions = {
     rootMargin: '0px 0px -50px 0px'
 };
 
-const observer = new IntersectionObserver((entries) => {
+const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            // Unobserve after animation to improve performance
+            fadeObserver.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Observe elements for fade-in animations
-const animatedElements = document.querySelectorAll(`
-    .about-content,
-    .skill-category,
-    .timeline-item,
-    .project-card,
-    .education-card,
-    .contact-card
-`);
+// Observe all fade-in-section elements
+const fadeInSections = document.querySelectorAll('.fade-in-section');
+fadeInSections.forEach(el => {
+    fadeObserver.observe(el);
+});
 
+// Observe old fade-in elements for backward compatibility
+const animatedElements = document.querySelectorAll('.fade-in');
 animatedElements.forEach(el => {
-    el.classList.add('fade-in');
-    observer.observe(el);
+    fadeObserver.observe(el);
 });
 
 // ============================================
