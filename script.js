@@ -455,70 +455,16 @@ window.addEventListener('scroll', debouncedHighlight);
 
 function toggleCollapse(element) {
     const card = element.closest('.collapsible-card');
-    const content = card.querySelector('.collapsible-content');
-    
-    // Toggle active class
     card.classList.toggle('active');
-    
-    // Close other collapsible items in the same section (optional)
-    // const section = card.closest('section');
-    // const otherCards = section.querySelectorAll('.collapsible-card');
-    // otherCards.forEach(otherCard => {
-    //     if (otherCard !== card && otherCard.classList.contains('active')) {
-    //         otherCard.classList.remove('active');
-    //     }
-    // });
 }
 
 // ============================================
-// PROJECT MODALS
-// ============================================
-
-function openProjectModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    }
-}
-
-function closeProjectModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.remove('show');
-        document.body.style.overflow = 'auto'; // Restore scrolling
-    }
-}
-
-// Close modal when clicking outside of modal content
-window.addEventListener('click', (event) => {
-    if (event.target.classList.contains('modal')) {
-        event.target.classList.remove('show');
-        document.body.style.overflow = 'auto';
-    }
-});
-
-// Close modal with Escape key
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-        const openModal = document.querySelector('.modal.show');
-        if (openModal) {
-            openModal.classList.remove('show');
-            document.body.style.overflow = 'auto';
-        }
-    }
-});
-
-// ============================================
-// AUTO-EXPAND FIRST EXPERIENCE ITEM
+// INITIALIZE COLLAPSIBLES
 // ============================================
 
 function initializeCollapsibles() {
-    // Optionally auto-expand the first collapsible item
-    const firstCollapsible = document.querySelector('.collapsible-card');
-    if (firstCollapsible) {
-        firstCollapsible.classList.add('active');
-    }
+    // All items collapsed by default (cleaner initial view)
+    // Users can click to expand details they're interested in
 }
 
 // ============================================
